@@ -1,17 +1,8 @@
 package com;
 
-import com.Repository.BiblioDAO;
-import com.Models.Documents.Livre;
-import com.Models.Documents.Media;
-import com.Models.Enums.Genres;
-import com.Models.Enums.MediaType;
-import com.Models.Users.Client;
-import com.Service.ClientService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
