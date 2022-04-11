@@ -1,25 +1,62 @@
-package com.Service;
+package com.service;
 
-import com.Models.Dette;
-import com.Models.Documents.Documents;
-import com.Models.Documents.Livre;
-import com.Models.Documents.Media;
-import com.Models.Emprunt;
-import com.Models.Enums.Genres;
-import com.Models.Enums.MediaType;
-import com.Models.Users.Client;
-import com.Repository.ClientRepository;
+import com.dto.DateDTO;
+import com.dto.DocumentDTO;
+import com.dto.EmpruntDTO;
+import com.dto.FraisDTO;
+import com.models.documents.Livre;
+import com.models.enums.Genres;
+import com.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
+
+    public long saveClient(String name, String adress, String phone) {
+        return 0;
+    }
+
+    public List<DocumentDTO> rechercheParTitre(String titre) {
+        return null;
+    }
+
+    public List<DocumentDTO> rechercheParAuteur(String auteur) {
+        return null;
+    }
+
+    public List<DocumentDTO> rechercheParAnne(int anne) {
+        return null;
+    }
+
+    public List<DocumentDTO> rechercheParGenre(Genres genre) {
+        return null;
+    }
+
+    public long emprunter(int bookId) {
+        return 0;
+    }
+
+    public void retourner(int clientId) {
+    }
+
+    public void payerFrais(int clientId, int montant) {
+    }
+
+    public List<DateDTO> getDatesDeRetour(int clientId) {
+        return null;
+    }
+
+    public List<EmpruntDTO> getEmprunts(int clientId) {
+        return null;
+    }
+
+    public List<FraisDTO> getFrais(int clientId) {
+        return null;
+    }
+
 //
 //    public ClientService() {
 //    }

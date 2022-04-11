@@ -1,5 +1,5 @@
-package com.Models.Documents;
-import com.Models.Enums.*;
+package com.models.documents;
+import com.models.enums.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;

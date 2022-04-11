@@ -1,5 +1,5 @@
-package com.Models.Documents;
-import com.Models.Enums.Genres;
+package com.models.documents;
+import com.models.enums.Genres;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.DiscriminatorValue;

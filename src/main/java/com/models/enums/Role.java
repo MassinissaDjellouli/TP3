@@ -1,4 +1,4 @@
-package com.Models.Enums;
+package com.models.enums;
 
 public enum Role {
     prepose,

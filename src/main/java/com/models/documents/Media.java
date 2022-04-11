@@ -1,5 +1,5 @@
-package com.Models.Documents;
-import com.Models.Enums.MediaType;
+package com.models.documents;
+import com.models.enums.MediaType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
-package com.Models.Users;
-import com.Models.Dette;
-import com.Models.Emprunt;
+package com.models.users;
+import com.models.Dette;
+import com.models.Emprunt;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;

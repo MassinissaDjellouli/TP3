@@ -1,5 +1,5 @@
-package com.Models.Users;
-import com.Models.Enums.Role;
+package com.models.users;
+import com.models.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

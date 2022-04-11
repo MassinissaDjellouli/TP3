@@ -1,5 +1,5 @@
-package com.Models;
-import com.Models.Users.Client;
+package com.models;
+import com.models.users.Client;
 import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
