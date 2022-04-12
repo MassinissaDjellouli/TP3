@@ -20,10 +20,28 @@ public class ModelToDTOTransformer {
         return null;
     }
     public static LivreDTO LivreToDTO(Livre livre){
-        return null;
+        return LivreDTO.builder()
+                .titre(livre.getTitre())
+                .auteur(livre.getAuteur())
+                .editeur(livre.getEditeur())
+                .anneeDePublication(Integer.toString(livre.getAnneeDePublication()))
+                .tempsEmprunt(Integer.toString(livre.getTempsEmprunt()))
+                .nbExemplaires(Integer.toString(livre.getNbExemplaires()))
+                .nbPages(Integer.toString(livre.getNbPages()))
+                .genre(livre.getGenre().toString())
+                .build();
     }
     public static MediaDTO mediaToDTO(Media media){
-        return null;
+        return MediaDTO.builder()
+                .titre(media.getTitre())
+                .auteur(media.getAuteur())
+                .editeur(media.getEditeur())
+                .anneeDePublication(Integer.toString(media.getAnneeDePublication()))
+                .tempsEmprunt(Integer.toString(media.getTempsEmprunt()))
+                .nbExemplaires(Integer.toString(media.getNbExemplaires()))
+                .duree(media.getDuree())
+                .type(media.getType().toString())
+                .build();
     }
 
     public static List<DocumentDTO> documentListToDTO(List<Documents> documentsList) {
