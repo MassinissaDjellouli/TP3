@@ -12,7 +12,11 @@ import java.util.Optional;
 @Repository
 public interface DocumentRepository extends JpaRepository<Documents,Long> {
     @Query("select l from Livre l where l.titre = :titre")
-    public Optional<List<Livre>> findBooksByTitle(String titre);
+    public Optional<List<Livre>> findBooksByTitre(String titre);
     @Query("select m from Media m where m.titre = :titre")
-    public Optional<List<Media>> findMediaByTitle(String titre);
+    public Optional<List<Media>> findMediaByTitre(String titre);
+    @Query("select l from Livre l where l.titre = :auteur")
+    public Optional<List<Livre>> findBooksByAuteur(String auteur);
+    @Query("select m from Media m where m.titre = :auteur")
+    public Optional<List<Media>> findMediaByAuteur(String auteur);
 }
