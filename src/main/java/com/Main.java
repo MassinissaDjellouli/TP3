@@ -33,9 +33,9 @@ public class Main implements CommandLineRunner {
         //Todo Enregistrement d'un client:
         long clId = clientService.saveClient("name","adress","phone");
         //Todo Ajout d'un livre:
-        long liId = employeeService.saveLivre("titre", "auteur", "editeur", 2000, 3, 30, 100, Genres.roman);
+        long liId = employeeService.saveLivre("titre", "auteur numero 2", "editeur", 2000, 3, 30, 100, Genres.roman);
+        long li2Id = employeeService.saveLivre("titre numero 2", "auteur", "editeur", 2000, 3, 30, 100, Genres.roman);
         //Todo Ajout d'un media:
-
         long meId = employeeService.saveMedia("titre","auteur","editeur",2000,3,30,"40min", MediaType.dvd);
         //Todo Recherche de titre:
             List<DocumentDTO> livres1 = clientService.rechercheParTitre("titre");
