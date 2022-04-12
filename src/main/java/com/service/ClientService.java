@@ -33,15 +33,11 @@ public class ClientService {
     }
 
     public List<DocumentDTO> rechercheParTitre(String titre) {
-        List<Livre> bookList = handleOptionalList(documentRepository.findBooksByTitre(titre));
-        List<Media> mediaList = handleOptionalList(documentRepository.findMediaByTitre(titre));
-        return ModelToDTOTransformer.documentListToDTO(combineMediaAndLivreList(bookList,mediaList));
+        return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByTitreContaining(titre)));
     }
 
     public List<DocumentDTO> rechercheParAuteur(String auteur) {
-        List<Livre> bookList = handleOptionalList(documentRepository.findBooksByAuteur(auteur));
-        List<Media> mediaList = handleOptionalList(documentRepository.findMediaByAuteur(auteur));
-        return ModelToDTOTransformer.documentListToDTO(combineMediaAndLivreList(bookList,mediaList));
+        return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByAuteur(auteur)));
     }
 
     public List<DocumentDTO> rechercheParAnne(int anne) {
