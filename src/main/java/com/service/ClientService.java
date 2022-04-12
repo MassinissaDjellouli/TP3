@@ -1,17 +1,24 @@
 package com.service;
 
-import com.dto.DateDTO;
-import com.dto.DocumentDTO;
-import com.dto.EmpruntDTO;
-import com.dto.DetteDTO;
+import com.dto.*;
+import com.models.documents.Documents;
+import com.models.documents.Livre;
+import com.models.documents.Media;
 import com.models.enums.Genres;
 import com.models.users.Client;
 import com.repository.ClientRepository;
 import com.repository.DocumentRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
+import java.util.Optional;
+@Component
+@RequiredArgsConstructor
 public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
@@ -26,7 +33,22 @@ public class ClientService {
     }
 
     public List<DocumentDTO> rechercheParTitre(String titre) {
-        return null;
+        List<Livre> bookList;
+        try{
+            bookList = handleOptionnal(documentRepository.findBooksByTitle(titre));
+        }catch (IllegalArgumentException e){
+            bookList = Collections.emptyList();
+        }
+        List<Media> mediaList;
+        try{
+            mediaList = handleOptionnal(documentRepository.findMediaByTitle(titre));
+        }catch (IllegalArgumentException e){
+            mediaList = Collections.emptyList();
+        }
+        List<Documents> documentsList = new ArrayList<>();
+        documentsList.addAll(bookList);
+        documentsList.addAll(mediaList);
+        return ModelToDTOTransformer.documentListToDTO(documentsList);
     }
 
     public List<DocumentDTO> rechercheParAuteur(String auteur) {
@@ -63,6 +85,12 @@ public class ClientService {
         return null;
     }
 
+    private <T> T handleOptionnal(Optional<T> optional){
+        if (optional.isEmpty()){
+            throw new IllegalArgumentException();
+        }
+        else return optional.get();
+    }
 //
 //    public ClientService() {
 //    }
