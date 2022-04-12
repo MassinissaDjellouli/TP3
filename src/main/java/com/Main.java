@@ -18,6 +18,9 @@ import java.util.List;
 public class Main implements CommandLineRunner {
     @Autowired
     ClientService clientService;
+    @Autowired
+    EmployeeService employeeService;
+
     public static void main(String[] args) {
         SpringApplication.run(Main.class,args);
     }
@@ -30,7 +33,6 @@ public class Main implements CommandLineRunner {
     @Override
     public void run(String... args){
 
-        EmployeeService employeeService = new EmployeeService();
         //Todo Enregistrement d'un client:
         long clId = clientService.saveClient("name","adress","phone");
         //Todo Ajout d'un livre:
