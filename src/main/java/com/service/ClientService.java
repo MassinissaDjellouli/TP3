@@ -5,7 +5,9 @@ import com.dto.DocumentDTO;
 import com.dto.EmpruntDTO;
 import com.dto.DetteDTO;
 import com.models.enums.Genres;
+import com.models.users.Client;
 import com.repository.ClientRepository;
+import com.repository.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -13,9 +15,14 @@ import java.util.List;
 public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private DocumentRepository documentRepository;
+
 
     public long saveClient(String name, String adress, String phone) {
-        return 0;
+        Client client = Client.builder().clientName(name).clientAdress(adress).clientPhone(phone).build();
+        clientRepository.save(client);
+        return client.getClientNumber();
     }
 
     public List<DocumentDTO> rechercheParTitre(String titre) {
