@@ -1,16 +1,31 @@
 package com.service;
 
 
+import com.dto.DocumentDTO;
+import com.models.documents.Livre;
+import com.models.documents.Media;
 import com.models.enums.Genres;
 import com.models.enums.MediaType;
+import com.repository.ClientRepository;
+import com.repository.DocumentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class EmployeeService {
-
+    @Autowired
+    DocumentRepository documentRepository;
     public long saveLivre(String titre, String auteur, String editeur, int anne, int tmpEmprunt, int nbExemplaires, int nbPages, Genres genre) {
-        return 0;
+        Livre livre = Livre.builder().titre(titre).auteur(auteur).editeur(editeur)
+                .anneeDePublication(anne).tempsEmprunt(tmpEmprunt)
+                .nbExemplaires(nbExemplaires).nbPages(nbPages).genre(genre).build();
+        documentRepository.save(livre);
+        return livre.getDocumentId();
     }
 
     public long saveMedia(String titre, String auteur, String editeur, int anne, int tmpEmprunt, int nbExemplaires, String duree, MediaType type) {
-        return 0;
+        Media media = Media.builder().titre(titre).auteur(auteur).editeur(editeur)
+                .anneeDePublication(anne).tempsEmprunt(tmpEmprunt)
+                .nbExemplaires(nbExemplaires).duree(duree).type(type).build();
+        documentRepository.save(media);
+        return media.getDocumentId();
     }
 }
