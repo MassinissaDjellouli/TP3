@@ -14,6 +14,8 @@ import java.util.Optional;
 public interface DocumentRepository extends JpaRepository<Documents,Long> {
     public Optional<List<Documents>> findAllByTitreContaining(String titre);
     public Optional<List<Documents>> findAllByAuteur(String auteur);
+    public Optional<List<Documents>> findAllByAnneeDePublication(int anne);
+
 
 //    @Query("select m from Media m where m.titre = :titre")
 //    public Optional<List<Media>> findMediaByTitre(String titre);
