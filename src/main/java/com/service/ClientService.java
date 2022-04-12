@@ -33,26 +33,15 @@ public class ClientService {
     }
 
     public List<DocumentDTO> rechercheParTitre(String titre) {
-        List<Livre> bookList;
-        try{
-            bookList = handleOptionnal(documentRepository.findBooksByTitle(titre));
-        }catch (IllegalArgumentException e){
-            bookList = Collections.emptyList();
-        }
-        List<Media> mediaList;
-        try{
-            mediaList = handleOptionnal(documentRepository.findMediaByTitle(titre));
-        }catch (IllegalArgumentException e){
-            mediaList = Collections.emptyList();
-        }
-        List<Documents> documentsList = new ArrayList<>();
-        documentsList.addAll(bookList);
-        documentsList.addAll(mediaList);
-        return ModelToDTOTransformer.documentListToDTO(documentsList);
+        List<Livre> bookList = handleOptionalList(documentRepository.findBooksByTitre(titre));
+        List<Media> mediaList = handleOptionalList(documentRepository.findMediaByTitre(titre));
+        return ModelToDTOTransformer.documentListToDTO(combineMediaAndLivreList(bookList,mediaList));
     }
 
     public List<DocumentDTO> rechercheParAuteur(String auteur) {
-        return null;
+        List<Livre> bookList = handleOptionalList(documentRepository.findBooksByAuteur(auteur));
+        List<Media> mediaList = handleOptionalList(documentRepository.findMediaByAuteur(auteur));
+        return ModelToDTOTransformer.documentListToDTO(combineMediaAndLivreList(bookList,mediaList));
     }
 
     public List<DocumentDTO> rechercheParAnne(int anne) {
@@ -84,12 +73,15 @@ public class ClientService {
     public List<DetteDTO> getFrais(int clientId) {
         return null;
     }
-
-    private <T> T handleOptionnal(Optional<T> optional){
-        if (optional.isEmpty()){
-            throw new IllegalArgumentException();
-        }
-        else return optional.get();
+    private List<Documents> combineMediaAndLivreList(List<Livre> livres, List<Media> medias){
+        List<Documents> documentsList = new ArrayList<>();
+        documentsList.addAll(livres);
+        documentsList.addAll(medias);
+        return documentsList;
+    }
+    private <T> List<T> handleOptionalList(Optional<List<T>> optional){
+        if (optional.isEmpty()) return Collections.emptyList();
+        return optional.get();
     }
 //
 //    public ClientService() {
