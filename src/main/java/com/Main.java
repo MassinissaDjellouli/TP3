@@ -46,15 +46,15 @@ public class Main implements CommandLineRunner {
         //Todo Recherche de genre:
             List<DocumentDTO> livres4 = clientService.rechercheParGenre(Genres.roman);
         //Todo emprunt d'un document si plus d'un exemplaire dispo:
-            long empId = clientService.emprunter(2);
+            long empId = clientService.emprunter(liId);
         //Todo Retour d'un emprunt
-            clientService.retourner(2);
+            clientService.retourner(empId);
         //Todo Obtenir la liste des dates de retour des documents
-            List<DateDTO> dates = clientService.getDatesDeRetour(3);
+            List<DateDTO> dates = clientService.getDatesDeRetour(clId);
         //Todo Obtenir la liste des frais
-            List<DetteDTO> frais = clientService.getFrais(3);
+            List<DetteDTO> frais = clientService.getFrais(clId);
         //Todo liste d'emprunts:1
-            List<EmpruntDTO> emprunt = clientService.getEmprunts(3);
+            List<EmpruntDTO> emprunt = clientService.getEmprunts(clId);
         //Todo Traitement des amendes
 
         //Todo interface web
