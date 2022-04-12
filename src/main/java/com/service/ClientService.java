@@ -69,12 +69,7 @@ public class ClientService {
     public List<DetteDTO> getFrais(int clientId) {
         return null;
     }
-    private List<Documents> combineMediaAndLivreList(List<Livre> livres, List<Media> medias){
-        List<Documents> documentsList = new ArrayList<>();
-        documentsList.addAll(livres);
-        documentsList.addAll(medias);
-        return documentsList;
-    }
+
     private <T> List<T> handleOptionalList(Optional<List<T>> optional){
         if (optional.isEmpty()) return Collections.emptyList();
         return optional.get();
