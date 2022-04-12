@@ -2,8 +2,12 @@ package com.dto;
 
 import com.models.Dette;
 import com.models.Emprunt;
+import com.models.documents.Documents;
 import com.models.documents.Livre;
 import com.models.documents.Media;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModelToDTOTransformer {
     public static EmpruntDTO empruntToDTO(Emprunt emprunt){
@@ -20,5 +24,17 @@ public class ModelToDTOTransformer {
     }
     public static MediaDTO mediaToDTO(Media media){
         return null;
+    }
+
+    public static List<DocumentDTO> documentListToDTO(List<Documents> documentsList) {
+        List<DocumentDTO> documentDTOList = new ArrayList<>();
+        for (Documents doc:documentsList) {
+            if(doc instanceof Livre){
+                documentDTOList.add(LivreToDTO((Livre) doc));
+            }else if(doc instanceof Media){
+                documentDTOList.add(mediaToDTO((Media) doc));
+            }
+        }
+        return documentDTOList;
     }
 }
