@@ -41,11 +41,11 @@ public class ClientService {
     }
 
     public List<DocumentDTO> rechercheParAnne(int anne) {
-        return null;
+        return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByAnneeDePublication(anne)));
     }
 
-    public List<LivreDTO> rechercheParGenre(Genres genre) {
-        return null;
+    public List<DocumentDTO> rechercheParGenre(Genres genre) {
+        return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByGenre(genre)));
     }
 
     public long emprunter(int bookId) {

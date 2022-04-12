@@ -44,7 +44,7 @@ public class Main implements CommandLineRunner {
         //Todo Recherche de année:
             List<DocumentDTO> livres3 = clientService.rechercheParAnne(2000);
         //Todo Recherche de genre:
-            List<LivreDTO> livres4 = clientService.rechercheParGenre(Genres.roman);
+            List<DocumentDTO> livres4 = clientService.rechercheParGenre(Genres.roman);
         //Todo emprunt d'un document si plus d'un exemplaire dispo:
             long empId = clientService.emprunter(2);
         //Todo Retour d'un emprunt

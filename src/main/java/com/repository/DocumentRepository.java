@@ -17,7 +17,7 @@ public interface DocumentRepository extends JpaRepository<Documents,Long> {
     public Optional<List<Documents>> findAllByAuteur(String auteur);
     public Optional<List<Documents>> findAllByAnneeDePublication(int anne);
     @Query("select l from Livre l where l.genre = :genre")
-    public Optional<List<Livre>> findAllByGenre(Genres genre);
+    public Optional<List<Documents>> findAllByGenre(Genres genre);
 
 //    @Query("select m from Media m where m.titre = :titre")
 //    public Optional<List<Media>> findMediaByTitre(String titre);
