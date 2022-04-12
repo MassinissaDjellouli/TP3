@@ -44,7 +44,7 @@ public class ClientService {
         return null;
     }
 
-    public List<DocumentDTO> rechercheParGenre(Genres genre) {
+    public List<LivreDTO> rechercheParGenre(Genres genre) {
         return null;
     }
 
