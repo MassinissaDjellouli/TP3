@@ -3,7 +3,7 @@ package com;
 import com.dto.DateDTO;
 import com.dto.DocumentDTO;
 import com.dto.EmpruntDTO;
-import com.dto.FraisDTO;
+import com.dto.DetteDTO;
 import com.models.enums.Genres;
 import com.models.enums.MediaType;
 import com.service.ClientService;
@@ -50,7 +50,7 @@ public class Main implements CommandLineRunner {
         //Todo Obtenir la liste des dates de retour des documents
             List<DateDTO> dates = clientService.getDatesDeRetour(3);
         //Todo Obtenir la liste des frais
-            List<FraisDTO> frais = clientService.getFrais(3);
+            List<DetteDTO> frais = clientService.getFrais(3);
         //Todo liste d'emprunts:1
             List<EmpruntDTO> emprunt = clientService.getEmprunts(3);
         //Todo Traitement des amendes

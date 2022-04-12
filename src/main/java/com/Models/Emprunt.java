@@ -1,6 +1,6 @@
-package com.Models;
-import com.Models.Documents.Documents;
-import com.Models.Users.Client;
+package com.models;
+import com.models.documents.Documents;
+import com.models.users.Client;
 import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;

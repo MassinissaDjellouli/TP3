@@ -3,8 +3,7 @@ package com.service;
 import com.dto.DateDTO;
 import com.dto.DocumentDTO;
 import com.dto.EmpruntDTO;
-import com.dto.FraisDTO;
-import com.models.documents.Livre;
+import com.dto.DetteDTO;
 import com.models.enums.Genres;
 import com.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ public class ClientService {
         return null;
     }
 
-    public List<FraisDTO> getFrais(int clientId) {
+    public List<DetteDTO> getFrais(int clientId) {
         return null;
     }
 
