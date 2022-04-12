@@ -4,9 +4,10 @@ import com.models.enums.Genres;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 public class LivreDTO extends DocumentDTO{
     private String nbPages;
     private String genre;
