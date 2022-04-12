@@ -8,6 +8,7 @@ import com.models.enums.Genres;
 import com.models.enums.MediaType;
 import com.service.ClientService;
 import com.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,8 @@ import java.util.List;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
+    @Autowired
+    ClientService clientService;
     public static void main(String[] args) {
         SpringApplication.run(Main.class,args);
     }
@@ -26,7 +29,7 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args){
-        ClientService clientService = new ClientService();
+
         EmployeeService employeeService = new EmployeeService();
         //Todo Enregistrement d'un client:
         long clId = clientService.saveClient("name","adress","phone");
