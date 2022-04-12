@@ -1,6 +1,7 @@
 package com.service;
 
 import com.dto.*;
+import com.models.Emprunt;
 import com.models.documents.Documents;
 import com.models.documents.Livre;
 import com.models.documents.Media;
@@ -8,11 +9,13 @@ import com.models.enums.Genres;
 import com.models.users.Client;
 import com.repository.ClientRepository;
 import com.repository.DocumentRepository;
+import com.repository.EmpruntRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +27,8 @@ public class ClientService {
     private ClientRepository clientRepository;
     @Autowired
     private DocumentRepository documentRepository;
+    @Autowired
+    private EmpruntRepository empruntRepository;
 
 
     public long saveClient(String name, String adress, String phone) {
@@ -48,8 +53,17 @@ public class ClientService {
         return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByGenre(genre)));
     }
 
-    public long emprunter(long bookId) {
-        return 0;
+    public long emprunter(long cliId,long docId) throws IllegalArgumentException{
+        Documents document = handleOptional(documentRepository.findById(docId));
+        Client client = handleOptional(clientRepository.findById(cliId));
+        Emprunt emprunt = Emprunt.builder()
+                .client(client)
+                .document(document)
+                .dateTime(LocalDateTime.now())
+                .returnDateTime(LocalDateTime.now().plusWeeks(document.getTempsEmprunt()))
+                .build();
+        empruntRepository.save(emprunt);
+        return emprunt.getId();
     }
 
     public void retourner(long empId) {
@@ -72,6 +86,10 @@ public class ClientService {
 
     private <T> List<T> handleOptionalList(Optional<List<T>> optional){
         if (optional.isEmpty()) return Collections.emptyList();
+        return optional.get();
+    }
+    private <T> T handleOptional(Optional<T> optional){
+        if (optional.isEmpty()) throw new IllegalArgumentException();
         return optional.get();
     }
 //
