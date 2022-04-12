@@ -48,25 +48,25 @@ public class ClientService {
         return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByGenre(genre)));
     }
 
-    public long emprunter(int bookId) {
+    public long emprunter(long bookId) {
         return 0;
     }
 
-    public void retourner(int clientId) {
+    public void retourner(long empId) {
     }
 
-    public void payerFrais(int clientId, int montant) {
+    public void payerFrais(long clientId, long montant) {
     }
 
-    public List<DateDTO> getDatesDeRetour(int clientId) {
+    public List<DateDTO> getDatesDeRetour(long clientId) {
         return null;
     }
 
-    public List<EmpruntDTO> getEmprunts(int clientId) {
+    public List<EmpruntDTO> getEmprunts(long clientId) {
         return null;
     }
 
-    public List<DetteDTO> getFrais(int clientId) {
+    public List<DetteDTO> getFrais(long clientId) {
         return null;
     }
 
