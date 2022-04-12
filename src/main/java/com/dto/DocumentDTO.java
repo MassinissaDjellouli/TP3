@@ -1,5 +1,8 @@
 package com.dto;
 
+import lombok.Data;
+
+@Data
 public abstract class DocumentDTO {
     private String titre;
     private String auteur;
