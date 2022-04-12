@@ -1,4 +1,4 @@
 package com.dto;
 
-public class DocumentDTO {
+public abstract class DocumentDTO {
 }
