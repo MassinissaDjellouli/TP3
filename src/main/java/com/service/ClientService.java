@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,7 +53,7 @@ public class ClientService {
     public List<DocumentDTO> rechercheParGenre(Genres genre) {
         return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByGenre(genre)));
     }
-
+    @Transactional
     public long emprunter(long cliId,long docId) throws IllegalArgumentException{
         Documents document = handleOptional(documentRepository.findById(docId));
         Client client = handleOptional(clientRepository.findById(cliId));
@@ -61,7 +62,10 @@ public class ClientService {
                 .document(document)
                 .dateTime(LocalDateTime.now())
                 .returnDateTime(LocalDateTime.now().plusWeeks(document.getTempsEmprunt()))
+                .returned(false)
                 .build();
+        document.setNbExemplaires(document.getNbExemplaires() - 1);
+        documentRepository.save(document);
         empruntRepository.save(emprunt);
         return emprunt.getId();
     }
