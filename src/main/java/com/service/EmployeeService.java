@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class EmployeeService {
     @Autowired
     DocumentRepository documentRepository;
-    public long saveLivre(String titre, String auteur, String editeur, int anne, int tmpEmprunt, int nbExemplaires, int nbPages, Genres genre) {
+    public int saveLivre(String titre, String auteur, String editeur, int anne, int tmpEmprunt, int nbExemplaires, int nbPages, Genres genre) {
         Livre livre = Livre.builder().titre(titre).auteur(auteur).editeur(editeur)
                 .anneeDePublication(anne).tempsEmprunt(tmpEmprunt)
                 .nbExemplaires(nbExemplaires).nbPages(nbPages).genre(genre).build();
@@ -23,7 +23,7 @@ public class EmployeeService {
         return livre.getDocumentId();
     }
 
-    public long saveMedia(String titre, String auteur, String editeur, int anne, int tmpEmprunt, int nbExemplaires, String duree, MediaType type) {
+    public int saveMedia(String titre, String auteur, String editeur, int anne, int tmpEmprunt, int nbExemplaires, String duree, MediaType type) {
         Media media = Media.builder().titre(titre).auteur(auteur).editeur(editeur)
                 .anneeDePublication(anne).tempsEmprunt(tmpEmprunt)
                 .nbExemplaires(nbExemplaires).duree(duree).type(type).build();

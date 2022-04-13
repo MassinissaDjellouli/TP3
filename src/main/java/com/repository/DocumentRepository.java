@@ -12,7 +12,7 @@ import javax.print.Doc;
 import java.util.List;
 import java.util.Optional;
 @Repository
-public interface DocumentRepository extends JpaRepository<Documents,Long> {
+public interface DocumentRepository extends JpaRepository<Documents,Integer> {
     public Optional<List<Documents>> findAllByTitreContaining(String titre);
     public Optional<List<Documents>> findAllByAuteur(String auteur);
     public Optional<List<Documents>> findAllByAnneeDePublication(int anne);

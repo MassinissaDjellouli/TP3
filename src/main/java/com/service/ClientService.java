@@ -32,7 +32,7 @@ public class ClientService {
     private EmpruntRepository empruntRepository;
 
 
-    public long saveClient(String name, String adress, String phone) {
+    public int saveClient(String name, String adress, String phone) {
         Client client = Client.builder().clientName(name).clientAdress(adress).clientPhone(phone).build();
         clientRepository.save(client);
         return client.getClientNumber();
@@ -54,8 +54,11 @@ public class ClientService {
         return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByGenre(genre)));
     }
     @Transactional
-    public long emprunter(long cliId,long docId) throws IllegalArgumentException{
+    public int emprunter(int cliId,int docId) throws IllegalArgumentException{
         Documents document = handleOptional(documentRepository.findById(docId));
+        if (document.getNbExemplaires() == 0){
+            throw new IllegalArgumentException();
+        }
         Client client = handleOptional(clientRepository.findById(cliId));
         Emprunt emprunt = Emprunt.builder()
                 .client(client)
