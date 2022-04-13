@@ -20,4 +20,5 @@ public class Emprunt {
     @OneToOne
     private Documents document;
     private LocalDateTime returnDateTime;
+    private boolean returned;
 }
