@@ -60,6 +60,9 @@ public class ClientService {
             throw new IllegalArgumentException();
         }
         Client client = handleOptional(clientRepository.findById(cliId));
+        if (client.getEmprunts().size() == 3){
+            throw new IllegalArgumentException();
+        }
         Emprunt emprunt = Emprunt.builder()
                 .client(client)
                 .document(document)
@@ -68,34 +71,38 @@ public class ClientService {
                 .returned(false)
                 .build();
         document.setNbExemplaires(document.getNbExemplaires() - 1);
+        List<Emprunt> emprunts = client.getEmprunts();
+        emprunts.add(emprunt);
+        client.setEmprunts(emprunts);
+        clientRepository.save(client);
         documentRepository.save(document);
         empruntRepository.save(emprunt);
         return emprunt.getId();
     }
 
-    public void retourner(long empId) {
+    public void retourner(int empId) throws IllegalArgumentException{
     }
 
-    public void payerFrais(long clientId, long montant) {
+    public void payerFrais(int clientId, int montant) {
     }
 
-    public List<DateDTO> getDatesDeRetour(long clientId) {
+    public List<DateDTO> getDatesDeRetour(int clientId) {
         return null;
     }
 
-    public List<EmpruntDTO> getEmprunts(long clientId) {
+    public List<EmpruntDTO> getEmprunts(int clientId) {
         return null;
     }
 
-    public List<DetteDTO> getFrais(long clientId) {
+    public List<DetteDTO> getFrais(int clientId) {
         return null;
     }
 
-    private <T> List<T> handleOptionalList(Optional<List<T>> optional){
+    private <T> List<T> handleOptionalList(Optional<List<T>> optional) throws IllegalArgumentException{
         if (optional.isEmpty()) return Collections.emptyList();
         return optional.get();
     }
-    private <T> T handleOptional(Optional<T> optional){
+    private <T> T handleOptional(Optional<T> optional) throws IllegalArgumentException{
         if (optional.isEmpty()) throw new IllegalArgumentException();
         return optional.get();
     }
