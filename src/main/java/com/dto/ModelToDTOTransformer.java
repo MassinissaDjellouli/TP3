@@ -1,6 +1,5 @@
 package com.dto;
 
-import com.models.Dette;
 import com.models.Emprunt;
 import com.models.documents.Documents;
 import com.models.documents.Livre;
@@ -14,9 +13,6 @@ public class ModelToDTOTransformer {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static EmpruntDTO empruntToDTO(Emprunt emprunt){
-        return null;
-    }
-    public static DetteDTO detteToDTO(Dette dette){
         return null;
     }
     public static DateDTO dateEmpruntToDTO(Emprunt emprunt){

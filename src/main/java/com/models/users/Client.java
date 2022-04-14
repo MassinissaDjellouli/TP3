@@ -1,5 +1,4 @@
 package com.models.users;
-import com.models.Dette;
 import com.models.Emprunt;
 import lombok.*;
 import javax.persistence.*;
@@ -7,7 +6,6 @@ import java.util.List;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = "dette")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -18,9 +16,6 @@ public class Client {
     private String clientName;
     private String clientAdress;
     private String clientPhone;
-    @OneToOne(mappedBy = "client",cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private Dette dette;
     @ToString.Exclude
     @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
     private List<Emprunt> emprunts;
