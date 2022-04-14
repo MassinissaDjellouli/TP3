@@ -103,7 +103,9 @@ public class ClientService {
     }
 
     public List<EmpruntDTO> getEmprunts(int clientId) {
-        return null;
+        Client client = handleOptional(clientRepository.findByIdWithEmprunts(clientId));
+        List<Emprunt> emprunts = client.getEmprunts();
+        return ModelToDTOTransformer.empruntListToEmpruntsDtoList(emprunts);
     }
 
     public List<DetteDTO> getFrais(int clientId) {
