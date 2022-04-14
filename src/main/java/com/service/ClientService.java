@@ -78,7 +78,7 @@ public class ClientService {
         empruntRepository.save(emprunt);
         return emprunt.getId();
     }
-
+    @Transactional
     public void retourner(int clId,int empId) throws IllegalArgumentException{
         Emprunt emprunt = handleOptional(empruntRepository.findById(empId));
         Client client = handleOptional(clientRepository.findByIdWithEmprunts(clId));
