@@ -56,9 +56,18 @@ public class ModelToDTOTransformer {
         return documentDTOList;
     }
     public static DateDTO empruntToDateDTO(Emprunt emprunt){
-        return null;
+        return DateDTO.builder()
+                .dateEmprunt(emprunt.getDateTime().format(DateDTO.DATE_TIME_FORMATTER))
+                .dateRetour(emprunt.getReturnDateTime().format(DateDTO.DATE_TIME_FORMATTER))
+                .clientName(emprunt.getClient().getClientName())
+                .documentName(emprunt.getDocument().getTitre())
+                .build();
     }
     public static List<DateDTO> empruntListToDateDtoList(List<Emprunt> emprunts) {
-        return null;
+        List<DateDTO> dateDTOList = new ArrayList<>();
+        for(Emprunt emprunt : emprunts){
+            dateDTOList.add(empruntToDateDTO(emprunt));
+        }
+        return dateDTOList;
     }
 }
