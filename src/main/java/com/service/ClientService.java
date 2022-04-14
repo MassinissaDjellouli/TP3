@@ -80,7 +80,19 @@ public class ClientService {
         return emprunt.getId();
     }
 
-    public void retourner(int empId) throws IllegalArgumentException{
+    public void retourner(int clId,int empId) throws IllegalArgumentException{
+        Emprunt emprunt = handleOptional(empruntRepository.findById(empId));
+        Client client = handleOptional(clientRepository.findByIdWithEmprunts(clId));
+        Documents document = emprunt.getDocument();
+        emprunt.setReturned(true);
+        List<Emprunt> emprunts = client.getEmprunts();
+        emprunts.remove(emprunt);
+        client.setEmprunts(emprunts);
+        document.setNbExemplaires(document.getNbExemplaires() + 1);
+        clientRepository.save(client);
+        documentRepository.save(document);
+        empruntRepository.save(emprunt);
+
     }
 
     public void payerFrais(int clientId, int montant) {

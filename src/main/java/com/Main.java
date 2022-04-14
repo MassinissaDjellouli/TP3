@@ -3,6 +3,7 @@ package com;
 import com.dto.*;
 import com.models.enums.Genres;
 import com.models.enums.MediaType;
+import com.models.users.Client;
 import com.service.ClientService;
 import com.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,11 @@ public class Main implements CommandLineRunner {
             List<DocumentDTO> livres4 = clientService.rechercheParGenre(Genres.roman);
         //Todo emprunt d'un document si plus d'un exemplaire dispo:
             int empId = clientService.emprunter(clId,liId);
+
         //Todo Retour d'un emprunt
-            clientService.retourner(empId);
+        livres2 = clientService.rechercheParTitre("titre");
+
+            clientService.retourner(clId,empId);
         //Todo Obtenir la liste des dates de retour des documents
             List<DateDTO> dates = clientService.getDatesDeRetour(clId);
         //Todo Obtenir la liste des frais
