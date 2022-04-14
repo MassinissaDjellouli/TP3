@@ -1,11 +1,19 @@
 package com.controllers;
 
+import com.dto.MediaDTO;
+import com.models.documents.Media;
+import com.models.enums.MediaType;
+import com.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class RootController {
+    EmployeeService employeeService = new EmployeeService();
     @GetMapping("/")
     public String getIndex(Model model){
         return "index";
@@ -37,5 +45,19 @@ public class RootController {
     @GetMapping("/retourner")
     public String getRetourner(Model model){
         return "retourner";
+    }
+
+    @PostMapping("/newMedia")
+    public String mediaPost(@ModelAttribute MediaDTO mediaDTO) {
+        employeeService.saveMedia(
+                mediaDTO.getTitre(),
+                mediaDTO.getAuteur(),
+                mediaDTO.getEditeur(),
+                Integer.parseInt(mediaDTO.getAnneeDePublication()),
+                Integer.parseInt(mediaDTO.getNbExemplaires()),
+                Integer.parseInt(mediaDTO.getTempsEmprunt()),
+                mediaDTO.getDuree(),
+                MediaType.valueOf(mediaDTO.getType()));
+        return "employees";
     }
 }
