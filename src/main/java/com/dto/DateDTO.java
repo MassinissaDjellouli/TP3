@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatterBuilder;
 @Data
 @Builder
 public class DateDTO {
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private String documentName;
     private String dateRetour;
 }

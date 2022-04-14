@@ -6,10 +6,13 @@ import com.models.documents.Documents;
 import com.models.documents.Livre;
 import com.models.documents.Media;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModelToDTOTransformer {
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     public static EmpruntDTO empruntToDTO(Emprunt emprunt){
         return null;
     }
@@ -57,9 +60,7 @@ public class ModelToDTOTransformer {
     }
     public static DateDTO empruntToDateDTO(Emprunt emprunt){
         return DateDTO.builder()
-                .dateEmprunt(emprunt.getDateTime().format(DateDTO.DATE_TIME_FORMATTER))
-                .dateRetour(emprunt.getReturnDateTime().format(DateDTO.DATE_TIME_FORMATTER))
-                .clientName(emprunt.getClient().getClientName())
+                .dateRetour(emprunt.getReturnDateTime().format(DATE_TIME_FORMATTER))
                 .documentName(emprunt.getDocument().getTitre())
                 .build();
     }
@@ -70,4 +71,20 @@ public class ModelToDTOTransformer {
         }
         return dateDTOList;
     }
+    public static EmpruntDTO empruntToEmpruntDTO(Emprunt emprunt){
+        return EmpruntDTO.builder()
+                .empruntDate(emprunt.getDateTime().format(DATE_TIME_FORMATTER))
+                .returnDate(emprunt.getReturnDateTime().format(DATE_TIME_FORMATTER))
+                .clientName(emprunt.getClient().getClientName())
+                .documentName(emprunt.getDocument().getTitre())
+                .build();
+    }
+    public static List<EmpruntDTO> empruntListToEmpruntsDtoList(List<Emprunt> emprunts) {
+        List<EmpruntDTO> empruntDTOList= new ArrayList<>();
+        for(Emprunt emprunt : emprunts){
+            empruntDTOList.add(empruntToEmpruntDTO(emprunt));
+        }
+        return empruntDTOList;
+    }
+
 }
