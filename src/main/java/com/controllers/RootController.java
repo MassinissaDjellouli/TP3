@@ -18,4 +18,12 @@ public class RootController {
     public String getEmployes(Model model){
         return "employees";
     }
+    @GetMapping("/newLivre")
+    public String getNewLivre(Model model){
+        return "newLivre";
+    }
+    @GetMapping("/newMedia")
+    public String getNewMedia(Model model){
+        return "newMedia";
+    }
 }

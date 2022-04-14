@@ -93,8 +93,6 @@ public class ClientService {
 
     }
 
-
-
     public List<DateDTO> getDatesDeRetour(int clientId) {
         Client client = handleOptional(clientRepository.findByIdWithEmprunts(clientId));
         List<Emprunt> emprunts = client.getEmprunts();
