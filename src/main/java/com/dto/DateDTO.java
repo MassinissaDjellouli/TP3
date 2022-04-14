@@ -1,10 +1,11 @@
 package com.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@Builder
 public class DateDTO {
     private String clientName;
     private String documentName;
