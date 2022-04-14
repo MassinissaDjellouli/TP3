@@ -13,8 +13,6 @@ import java.time.format.DateTimeFormatterBuilder;
 @Builder
 public class DateDTO {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private String clientName;
     private String documentName;
-    private String dateEmprunt;
     private String dateRetour;
 }
