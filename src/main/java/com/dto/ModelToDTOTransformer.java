@@ -55,4 +55,10 @@ public class ModelToDTOTransformer {
         }
         return documentDTOList;
     }
+    public static DateDTO empruntToDateDTO(Emprunt emprunt){
+        return null;
+    }
+    public static List<DateDTO> empruntListToDateDtoList(List<Emprunt> emprunts) {
+        return null;
+    }
 }
