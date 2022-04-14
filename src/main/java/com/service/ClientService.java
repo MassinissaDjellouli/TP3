@@ -74,7 +74,6 @@ public class ClientService {
         List<Emprunt> emprunts = client.getEmprunts();
         emprunts.add(emprunt);
         client.setEmprunts(emprunts);
-        clientRepository.save(client);
         documentRepository.save(document);
         empruntRepository.save(emprunt);
         return emprunt.getId();
@@ -89,7 +88,6 @@ public class ClientService {
         emprunts.remove(emprunt);
         client.setEmprunts(emprunts);
         document.setNbExemplaires(document.getNbExemplaires() + 1);
-        clientRepository.save(client);
         documentRepository.save(document);
         empruntRepository.save(emprunt);
 
@@ -99,7 +97,9 @@ public class ClientService {
     }
 
     public List<DateDTO> getDatesDeRetour(int clientId) {
-        return null;
+        Client client = handleOptional(clientRepository.findByIdWithEmprunts(clientId));
+        List<Emprunt> emprunts = client.getEmprunts();
+        return ModelToDTOTransformer.empruntListToDateDtoList(emprunts);
     }
 
     public List<EmpruntDTO> getEmprunts(int clientId) {

@@ -57,7 +57,7 @@ public class Main implements CommandLineRunner {
             List<DateDTO> dates = clientService.getDatesDeRetour(clId);
         //Todo Obtenir la liste des frais
             List<DetteDTO> frais = clientService.getFrais(clId);
-        //Todo liste d'emprunts:1
+        //Todo liste d'emprunts:
             List<EmpruntDTO> emprunt = clientService.getEmprunts(clId);
         //Todo Traitement des amendes
 
