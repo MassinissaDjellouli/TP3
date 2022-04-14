@@ -26,4 +26,16 @@ public class RootController {
     public String getNewMedia(Model model){
         return "newMedia";
     }
+    @GetMapping("/createClient")
+    public String getCreateClient(Model model){
+        return "createClient";
+    }
+    @GetMapping("/emprunter")
+    public String getEmprunter(Model model){
+        return "emprunter";
+    }
+    @GetMapping("/retourner")
+    public String getRetourner(Model model){
+        return "retourner";
+    }
 }
