@@ -22,15 +22,10 @@ public class Main implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(Main.class,args);
     }
-    private static void printAll(List list){
-        for(Object obj : list){
-            System.out.println(obj);
-        }
-    }
+
 
     @Override
     public void run(String... args){
-
         //Todo Enregistrement d'un client:
         int clId = clientService.saveClient("name","adress","phone");
         //Todo Ajout d'un livre:
@@ -48,19 +43,13 @@ public class Main implements CommandLineRunner {
             List<DocumentDTO> livres4 = clientService.rechercheParGenre(Genres.roman);
         //Todo emprunt d'un document si plus d'un exemplaire dispo:
             int empId = clientService.emprunter(clId,liId);
-
         //Todo Retour d'un emprunt
-        livres2 = clientService.rechercheParTitre("titre");
-
+            livres2 = clientService.rechercheParTitre("titre");
             clientService.retourner(clId,empId);
         //Todo Obtenir la liste des dates de retour des documents
             List<DateDTO> dates = clientService.getDatesDeRetour(clId);
-        //Todo Obtenir la liste des frais
-            List<DetteDTO> frais = clientService.getFrais(clId);
         //Todo liste d'emprunts:
             List<EmpruntDTO> emprunt = clientService.getEmprunts(clId);
-        //Todo Traitement des amendes
-
         //Todo interface web
     }
 }

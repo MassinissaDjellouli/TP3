@@ -1,6 +1,7 @@
 package com.service;
 
 import com.dto.*;
+import com.models.Dette;
 import com.models.Emprunt;
 import com.models.documents.Documents;
 import com.models.documents.Livre;
@@ -93,8 +94,7 @@ public class ClientService {
 
     }
 
-    public void payerFrais(int clientId, int montant) {
-    }
+
 
     public List<DateDTO> getDatesDeRetour(int clientId) {
         Client client = handleOptional(clientRepository.findByIdWithEmprunts(clientId));
@@ -108,9 +108,6 @@ public class ClientService {
         return ModelToDTOTransformer.empruntListToEmpruntsDtoList(emprunts);
     }
 
-    public List<DetteDTO> getFrais(int clientId) {
-        return null;
-    }
 
     private <T> List<T> handleOptionalList(Optional<List<T>> optional) throws IllegalArgumentException{
         if (optional.isEmpty()) return Collections.emptyList();
