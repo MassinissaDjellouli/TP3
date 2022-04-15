@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +7,24 @@
 <body>
     <h1>Nouveau Media</h1>
     <a th:href="@{/}">Page principale</a>
+    <form th:action="@{/newMedia}" th:object="${MediaDTO}" method="post">
+        <label>titre</label>
+        <input type="text" th:field="*{titre}">
+        <label>auteur</label>
+        <input type="text" th:field="*{auteur}">
+        <label>editeur</label>
+        <input type="text" th:field="*{editeur}">
+        <label>année de publication</label>
+        <input type="text" th:field="*{anneeDePublication}">
+        <label>temps d'emprunt</label>
+        <input type="text" th:field="*{tempsEmprunt}">
+        <label>nb d'exemplaire</label>
+        <input type="text" th:field="*{nbExemplaires}">
+        <label>duree</label>
+        <input type="text" th:field="*{duree}">
+        <label>type</label>
+        <input type="text" th:field="*{type}">
+        <input type="submit">
+    </form>
 </body>
 </html>
