@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Nouveau Livre</h1>
+    <a th:href="@{/}">Page principale</a>
+    <form th:action="@{/createLivre}" th:object="${LivreDTO}" method="post">
+        <label>titre</label>
+        <input type="text" th:field="*{titre}">
+        </br>
+        <label>auteur</label>
+        <input type="text" th:field="*{auteur}">
+        </br>
+        <label>editeur</label>
+        <input type="text" th:field="*{editeur}">
+        </br>
+        <label>année de publication</label>
+        <input type="text" th:field="*{anneeDePublication}">
+        </br>
+        <label>temps d'emprunt</label>
+        <input type="text" th:field="*{tempsEmprunt}">
+        </br>
+        <label>nb d'exemplaire</label>
+        <input type="text" th:field="*{nbExemplaires}">
+        </br>
+        <label>nb de pages</label>
+        <input type="text" th:field="*{nbPages}">
+        </br>
+        <label>genre</label>
+        <input type="text" th:field="*{genre}">
+        </br>
+        <input type="submit">
+    </form>
+</body>
+</html>
