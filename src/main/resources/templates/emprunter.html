@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +7,18 @@
 <body>
     <h1>Emprunter</h1>
     <a th:href="@{/}">Page principale</a>
+    <form th:action="@{/emprunter}" th:object="${EmpruntRetourForm}" method="post">
+        <label>Choix du document</label>
+        <select th:field="*{bookId}">
+            <option th:each="doc : ${docList}" th:value="${doc.getDocumentId()}"
+                    th:text=
+                            "'#' + ${doc.getDocumentId()} + ': ' + ${doc.getTitre()} + ' (' + ${doc.getTempsEmprunt()} + ' semaines d\'emprunts)'"></option>
+        </select>
+        </br>
+        <label>Numéro Client (Id: 1)</label>
+        <input type="text" th:field="*{clientId}">
+        </br>
+        <input type="submit">
+    </form>
 </body>
 </html>

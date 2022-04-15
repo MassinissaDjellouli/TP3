@@ -37,7 +37,9 @@ public class ClientService {
         clientRepository.save(client);
         return client.getClientNumber();
     }
-
+    public List<Documents> rechercheGlobale(){
+        return documentRepository.findAll();
+    }
     public List<DocumentDTO> rechercheParTitre(String titre) {
         return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByTitreContaining(titre)));
     }

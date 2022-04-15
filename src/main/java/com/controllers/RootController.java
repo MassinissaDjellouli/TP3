@@ -1,8 +1,12 @@
 package com.controllers;
 
+import com.dto.DocumentDTO;
 import com.dto.LivreDTO;
 import com.dto.MediaDTO;
 import com.form.ClientForm;
+import com.form.EmpruntRetourForm;
+import com.models.Emprunt;
+import com.models.documents.Documents;
 import com.models.documents.Livre;
 import com.models.documents.Media;
 import com.models.enums.Genres;
@@ -21,6 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class RootController {
@@ -60,6 +66,10 @@ public class RootController {
     }
     @GetMapping("/emprunter")
     public String getEmprunter(Model model){
+        EmpruntRetourForm empruntRetourForm = new EmpruntRetourForm();
+        model.addAttribute("EmpruntRetourForm",empruntRetourForm);
+        List<Documents> documentsList = clientService.rechercheGlobale();
+        model.addAttribute("docList", documentsList);
         return "emprunter";
     }
     @GetMapping("/retourner")
@@ -115,6 +125,23 @@ public class RootController {
                 clientForm.adress,
                 clientForm.phone
         );
+        return "users";
+    }
+    @PostMapping("/emprunter")
+    public String empruntPost(@Valid
+                            @ModelAttribute EmpruntRetourForm empruntRetourForm,
+                             BindingResult errors) {
+        if (errors.hasErrors()) {
+            return "redirect:/formError/emprunter";
+        }
+        try {
+        clientService.emprunter(
+                empruntRetourForm.getClientId(),
+                empruntRetourForm.getBookId());
+        }catch (Exception e){
+            return "redirect:/formError/emprunter";
+        }
+
         return "users";
     }
     @GetMapping("/formError/{form}")
