@@ -74,4 +74,9 @@ public class RootController {
                 MediaType.valueOf(mediaDTO.getType()));
         return "newMedia";
     }
+    @GetMapping("/formError/{form}")
+    public String getFormError(Model model, @PathVariable String form){
+        model.addAttribute("form",form);
+        return "formError";
+    }
 }
