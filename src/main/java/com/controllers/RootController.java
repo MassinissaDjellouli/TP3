@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class RootController {
-    EmployeeService employeeService = new EmployeeService();
+    @Autowired
+    EmployeeService employeeService;
     @GetMapping("/")
     public String getIndex(Model model){
         return "index";
@@ -32,6 +33,8 @@ public class RootController {
     }
     @GetMapping("/newMedia")
     public String getNewMedia(Model model){
+        MediaDTO mediaDTO = new MediaDTO();
+        model.addAttribute("MediaDTO",mediaDTO);
         return "newMedia";
     }
     @GetMapping("/createClient")
