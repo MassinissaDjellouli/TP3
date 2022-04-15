@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RetourForm {
-    private int empId;
     private int clientId;
+    private int empId;
 }

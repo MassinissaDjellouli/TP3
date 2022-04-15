@@ -1,17 +1,13 @@
 package com.controllers;
 
-import com.dto.DocumentDTO;
 import com.dto.LivreDTO;
 import com.dto.MediaDTO;
 import com.form.ClientForm;
-import com.form.EmpruntRetourForm;
-import com.models.Emprunt;
+import com.form.EmpruntForm;
+import com.form.RetourForm;
 import com.models.documents.Documents;
-import com.models.documents.Livre;
-import com.models.documents.Media;
 import com.models.enums.Genres;
 import com.models.enums.MediaType;
-import com.models.users.Client;
 import com.service.ClientService;
 import com.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -66,14 +60,16 @@ public class RootController {
     }
     @GetMapping("/emprunter")
     public String getEmprunter(Model model){
-        EmpruntRetourForm empruntRetourForm = new EmpruntRetourForm();
-        model.addAttribute("EmpruntRetourForm",empruntRetourForm);
+        EmpruntForm empruntForm = new EmpruntForm();
+        model.addAttribute("EmpruntRetourForm", empruntForm);
         List<Documents> documentsList = clientService.rechercheGlobale();
         model.addAttribute("docList", documentsList);
         return "emprunter";
     }
     @GetMapping("/retourner")
     public String getRetourner(Model model){
+        RetourForm retourForm = new RetourForm();
+        model.addAttribute("RetourForm",retourForm);
         return "retourner";
     }
 
@@ -129,17 +125,34 @@ public class RootController {
     }
     @PostMapping("/emprunter")
     public String empruntPost(@Valid
-                            @ModelAttribute EmpruntRetourForm empruntRetourForm,
+                            @ModelAttribute EmpruntForm empruntForm,
                              BindingResult errors) {
         if (errors.hasErrors()) {
             return "redirect:/formError/emprunter";
         }
         try {
         clientService.emprunter(
-                empruntRetourForm.getClientId(),
-                empruntRetourForm.getBookId());
+                empruntForm.getClientId(),
+                empruntForm.getBookId());
         }catch (Exception e){
             return "redirect:/formError/emprunter";
+        }
+
+        return "users";
+    }
+    @PostMapping("/retourner")
+    public String retourPost(@Valid
+                            @ModelAttribute RetourForm retourForm,
+                             BindingResult errors) {
+        if (errors.hasErrors()) {
+            return "redirect:/formError/retourner";
+        }
+        try {
+        clientService.retourner(
+                retourForm.getClientId(),
+                retourForm.getEmpId());
+        }catch (Exception e){
+            return "redirect:/formError/retourner";
         }
 
         return "users";
