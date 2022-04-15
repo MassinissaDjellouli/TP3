@@ -1,7 +1,10 @@
 package com.controllers;
 
+import com.dto.LivreDTO;
 import com.dto.MediaDTO;
+import com.models.documents.Livre;
 import com.models.documents.Media;
+import com.models.enums.Genres;
 import com.models.enums.MediaType;
 import com.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,8 @@ public class RootController {
     }
     @GetMapping("/newLivre")
     public String getNewLivre(Model model){
+        LivreDTO livreDTO = new LivreDTO();
+        model.addAttribute("LivreDTO",livreDTO);
         return "newLivre";
     }
     @GetMapping("/newMedia")
@@ -55,11 +60,28 @@ public class RootController {
         return "retourner";
     }
 
+    @PostMapping("/createLivre")
+    public String livrePost(@Valid
+                                @ModelAttribute LivreDTO livreDto,
+                            BindingResult errors){
+        if (errors.hasErrors()) {
+            return "redirect:/formError/newLivre";
+        }
+        employeeService.saveLivre(
+                livreDto.getTitre(),
+                livreDto.getAuteur(),
+                livreDto.getEditeur(),
+                Integer.parseInt(livreDto.getAnneeDePublication()),
+                Integer.parseInt(livreDto.getNbExemplaires()),
+                Integer.parseInt(livreDto.getTempsEmprunt()),
+                Integer.parseInt(livreDto.getNbPages()),
+                Genres.valueOf(livreDto.getGenre()));
+        return "employees";
+    }
     @PostMapping("/createMedia")
     public String mediaPost(@Valid
-                                @ModelAttribute MediaDTO mediaDTO,
-                            BindingResult errors,
-                            RedirectAttributes redirectAttributes) {
+                            @ModelAttribute MediaDTO mediaDTO,
+                            BindingResult errors) {
         if (errors.hasErrors()) {
             return "redirect:/formError/newMedia";
         }
