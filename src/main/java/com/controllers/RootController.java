@@ -2,10 +2,13 @@ package com.controllers;
 
 import com.dto.LivreDTO;
 import com.dto.MediaDTO;
+import com.form.ClientForm;
 import com.models.documents.Livre;
 import com.models.documents.Media;
 import com.models.enums.Genres;
 import com.models.enums.MediaType;
+import com.models.users.Client;
+import com.service.ClientService;
 import com.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,8 @@ import javax.validation.Valid;
 public class RootController {
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    ClientService clientService;
     @GetMapping("/")
     public String getIndex(Model model){
         return "index";
@@ -49,6 +54,8 @@ public class RootController {
     }
     @GetMapping("/createClient")
     public String getCreateClient(Model model){
+        ClientForm clientForm = new ClientForm();
+        model.addAttribute("ClientForm",clientForm);
         return "createClient";
     }
     @GetMapping("/emprunter")
@@ -95,6 +102,20 @@ public class RootController {
                 mediaDTO.getDuree(),
                 MediaType.valueOf(mediaDTO.getType()));
         return "employees";
+    }
+    @PostMapping("/createClient")
+    public String clientPost(@Valid
+                            @ModelAttribute ClientForm clientForm,
+                             BindingResult errors) {
+        if (errors.hasErrors()) {
+            return "redirect:/formError/createClient";
+        }
+        clientService.saveClient(
+                clientForm.name,
+                clientForm.adress,
+                clientForm.phone
+        );
+        return "users";
     }
     @GetMapping("/formError/{form}")
     public String getFormError(Model model, @PathVariable String form){

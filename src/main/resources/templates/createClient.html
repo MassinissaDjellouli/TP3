@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +7,17 @@
 <body>
     <h1>Nouveau Client</h1>
     <a th:href="@{/}">Page principale</a>
+    <form th:action="@{/createClient}" th:object="${ClientForm}" method="post">
+        <label>Nom</label>
+        <input type="text" th:field="*{name}">
+        </br>
+        <label>Adresse</label>
+        <input type="text" th:field="*{adress}">
+        </br>
+        <label>Telephone</label>
+        <input type="text" th:field="*{phone}">
+        </br>
+        <input type="submit">
+    </form>
 </body>
 </html>
