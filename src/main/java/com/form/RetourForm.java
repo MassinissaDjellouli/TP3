@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class EmpruntRetourForm {
-    private int bookId;
+@AllArgsConstructor
+@Builder
+public class RetourForm {
+    private int empId;
     private int clientId;
 }
