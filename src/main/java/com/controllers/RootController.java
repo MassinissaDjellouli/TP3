@@ -72,7 +72,7 @@ public class RootController {
                 Integer.parseInt(mediaDTO.getTempsEmprunt()),
                 mediaDTO.getDuree(),
                 MediaType.valueOf(mediaDTO.getType()));
-        return "newMedia";
+        return "employees";
     }
     @GetMapping("/formError/{form}")
     public String getFormError(Model model, @PathVariable String form){

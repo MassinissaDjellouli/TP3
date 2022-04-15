@@ -7,23 +7,31 @@
 <body>
     <h1>Nouveau Media</h1>
     <a th:href="@{/}">Page principale</a>
-    <form th:action="@{/newMedia}" th:object="${MediaDTO}" method="post">
+    <form th:action="@{/createMedia}" th:object="${MediaDTO}" method="post">
         <label>titre</label>
         <input type="text" th:field="*{titre}">
+        </br>
         <label>auteur</label>
         <input type="text" th:field="*{auteur}">
+        </br>
         <label>editeur</label>
         <input type="text" th:field="*{editeur}">
+        </br>
         <label>année de publication</label>
         <input type="text" th:field="*{anneeDePublication}">
+        </br>
         <label>temps d'emprunt</label>
         <input type="text" th:field="*{tempsEmprunt}">
+        </br>
         <label>nb d'exemplaire</label>
         <input type="text" th:field="*{nbExemplaires}">
+        </br>
         <label>duree</label>
         <input type="text" th:field="*{duree}">
+        </br>
         <label>type</label>
         <input type="text" th:field="*{type}">
+        </br>
         <input type="submit">
     </form>
 </body>
