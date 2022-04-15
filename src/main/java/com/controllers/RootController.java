@@ -7,9 +7,14 @@ import com.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 public class RootController {
@@ -50,8 +55,14 @@ public class RootController {
         return "retourner";
     }
 
-    @PostMapping("/newMedia")
-    public String mediaPost(@ModelAttribute MediaDTO mediaDTO) {
+    @PostMapping("/createMedia")
+    public String mediaPost(@Valid
+                                @ModelAttribute MediaDTO mediaDTO,
+                            BindingResult errors,
+                            RedirectAttributes redirectAttributes) {
+        if (errors.hasErrors()) {
+            return "redirect:/formError/newMedia";
+        }
         employeeService.saveMedia(
                 mediaDTO.getTitre(),
                 mediaDTO.getAuteur(),
@@ -61,6 +72,6 @@ public class RootController {
                 Integer.parseInt(mediaDTO.getTempsEmprunt()),
                 mediaDTO.getDuree(),
                 MediaType.valueOf(mediaDTO.getType()));
-        return "employees";
+        return "newMedia";
     }
 }
