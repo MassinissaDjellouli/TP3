@@ -20,6 +20,7 @@ public class EmployeeService {
                 .anneeDePublication(anne).tempsEmprunt(tmpEmprunt)
                 .nbExemplaires(nbExemplaires).nbPages(nbPages).genre(genre).build();
         documentRepository.save(livre);
+        System.out.println(livre.getDocumentId());
         return livre.getDocumentId();
     }
 
@@ -28,6 +29,7 @@ public class EmployeeService {
                 .anneeDePublication(anne).tempsEmprunt(tmpEmprunt)
                 .nbExemplaires(nbExemplaires).duree(duree).type(type).build();
         documentRepository.save(media);
+        System.out.println(media.getDocumentId());
         return media.getDocumentId();
     }
 }

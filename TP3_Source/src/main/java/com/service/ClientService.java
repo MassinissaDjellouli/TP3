@@ -31,15 +31,17 @@ public class ClientService {
     @Autowired
     private EmpruntRepository empruntRepository;
 
-
     public int saveClient(String name, String adress, String phone) {
         Client client = Client.builder().clientName(name).clientAdress(adress).clientPhone(phone).build();
         clientRepository.save(client);
+        System.out.println(client.getClientNumber());
         return client.getClientNumber();
     }
+
     public List<Documents> rechercheGlobale(){
         return documentRepository.findAll();
     }
+
     public List<DocumentDTO> rechercheParTitre(String titre) {
         return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByTitreContaining(titre)));
     }
@@ -55,6 +57,7 @@ public class ClientService {
     public List<DocumentDTO> rechercheParGenre(Genres genre) {
         return ModelToDTOTransformer.documentListToDTO(handleOptionalList(documentRepository.findAllByGenre(genre)));
     }
+
     @Transactional
     public int emprunter(int cliId,int docId) throws IllegalArgumentException{
         Documents document = handleOptional(documentRepository.findById(docId));
@@ -78,13 +81,16 @@ public class ClientService {
         client.setEmprunts(emprunts);
         documentRepository.save(document);
         empruntRepository.save(emprunt);
+        System.out.println(emprunt.getId());
         return emprunt.getId();
     }
+
     @Transactional
     public void retourner(int clId,int empId) throws IllegalArgumentException{
         Emprunt emprunt = handleOptional(empruntRepository.findById(empId));
         Client client = handleOptional(clientRepository.findByIdWithEmprunts(clId));
         Documents document = emprunt.getDocument();
+        if(emprunt.isReturned()) throw new IllegalArgumentException();
         emprunt.setReturned(true);
         List<Emprunt> emprunts = client.getEmprunts();
         emprunts.remove(emprunt);
@@ -92,7 +98,7 @@ public class ClientService {
         document.setNbExemplaires(document.getNbExemplaires() + 1);
         documentRepository.save(document);
         empruntRepository.save(emprunt);
-
+        System.out.println(emprunt.getId());
     }
 
     public List<DateDTO> getDatesDeRetour(int clientId) {
@@ -107,11 +113,11 @@ public class ClientService {
         return ModelToDTOTransformer.empruntListToEmpruntsDtoList(emprunts);
     }
 
-
     private <T> List<T> handleOptionalList(Optional<List<T>> optional) throws IllegalArgumentException{
         if (optional.isEmpty()) return Collections.emptyList();
         return optional.get();
     }
+
     private <T> T handleOptional(Optional<T> optional) throws IllegalArgumentException{
         if (optional.isEmpty()) throw new IllegalArgumentException();
         return optional.get();
